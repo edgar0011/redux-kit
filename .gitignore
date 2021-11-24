@@ -1,11 +1,10 @@
 dist
-dist-storybook
 node_modules
-flow-typed
 vcs.xml
 .idea
 .vscode
 npm-debug.log
+yarn-error.log
 .eslintcache
 .env
 .DS_Store
