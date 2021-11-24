@@ -1,5 +1,4 @@
 dist
-es
 dist-storybook
 node_modules
 flow-typed

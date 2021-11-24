@@ -3,20 +3,20 @@ import resolvePlugin from 'rollup-plugin-node-resolve'
 import commonjsPlugin from 'rollup-plugin-commonjs'
 import jsonPlugin from 'rollup-plugin-json'
 
-import pkg from './package.json'
+// import pkg from './package.json'
 
 const extensions = ['.js', '.jsx', '.ts', '.tsx']
 
 export default {
-  input: 'src/index.ts',
+  input: ['src/index.ts', 'src/core/redux/index.js'],
   output: [
     {
-      file: pkg.main,
+      dir: 'dist/lib/cjs',
       format: 'cjs',
       sourcemap: true,
     },
     {
-      file: pkg.module,
+      dir: 'dist/lib/esm',
       format: 'es',
       sourcemap: true,
     },
@@ -39,7 +39,7 @@ export default {
     'reselect',
     'react-select',
     'ramda',
-    'lodash-es'
+    'lodash-es',
   ],
   watch: {
     include: 'src/**',
