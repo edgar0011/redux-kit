@@ -1,0 +1,12 @@
+dist
+es
+dist-storybook
+node_modules
+flow-typed
+vcs.xml
+.idea
+.vscode
+npm-debug.log
+.eslintcache
+.env
+.DS_Store

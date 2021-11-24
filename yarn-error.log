@@ -1,0 +1,41 @@
+Arguments: 
+  /Users/martinweiser/.nvm/versions/node/v14.17.5/bin/node /usr/local/bin/yarn add -D @earlorg/eslint-config
+
+PATH: 
+  /Users/martinweiser/.cargo/bin:/opt/homebrew/opt/openjdk@11/bin:/opt/homebrew/opt/openjdk/bin:/opt/homebrew/sbin:/Users/martinweiser/.nvm/versions/node/v14.17.5/bin:/opt/homebrew/sbin:/opt/homebrew/bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/opt/homebrew/bin:/opt/homebrew/opt:/Applications/Server.app/Contents/ServerRoot/usr/bin:/Applications/Server.app/Contents/ServerRoot/usr/sbin:/Library/Apple/usr/bin:/Users/martinweiser/.cargo/bin:/opt/homebrew/opt/openjdk@11/bin:/opt/homebrew/opt/openjdk/bin:/opt/homebrew/sbin:/Users/martinweiser/.nvm/versions/node/v14.17.5/bin
+
+Yarn version: 
+  1.22.10
+
+Node version: 
+  14.17.5
+
+Platform: 
+  darwin arm64
+
+Trace: 
+  SyntaxError: /Users/martinweiser/Work/projects/javascript/redux-kit/package.json: Unexpected token } in JSON at position 219
+      at JSON.parse (<anonymous>)
+      at /usr/local/lib/node_modules/yarn/lib/cli.js:1625:59
+      at Generator.next (<anonymous>)
+      at step (/usr/local/lib/node_modules/yarn/lib/cli.js:310:30)
+      at /usr/local/lib/node_modules/yarn/lib/cli.js:321:13
+
+npm manifest: 
+  {
+    "name": "redux-kit",
+    "version": "1.0.0",
+    "main": "dist/lib/index.js",
+    "module": "es/index.js",
+    "license": "MIT",
+    "repository": {
+      "type": "git",
+      "url": "https://github.com/edgar0011/redux-kit"
+    },
+  }
+
+yarn manifest: 
+  No manifest
+
+Lockfile: 
+  No lockfile
