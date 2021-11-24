@@ -1,4 +1,4 @@
-import { capitalize, capitalize2 } from './index'
+import { capitalize, capitalize2 } from './quarks'
 
 describe('capialize', () => {
   it('should capitalize words', () => {

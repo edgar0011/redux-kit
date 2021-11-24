@@ -1,2 +1,2 @@
-export * as quarks from './helpers/quarks'
+export * as quarks from './core/utils'
 export * as redux from './core/redux'

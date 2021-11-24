@@ -8,7 +8,7 @@ import jsonPlugin from 'rollup-plugin-json'
 const extensions = ['.js', '.jsx', '.ts', '.tsx']
 
 export default {
-  input: ['src/index.ts', 'src/core/redux/index.js'],
+  input: ['src/index.ts', 'src/core/redux/index.ts', 'src/core/utils/index.ts'],
   output: [
     {
       dir: 'dist/lib/cjs',

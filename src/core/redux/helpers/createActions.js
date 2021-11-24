@@ -1,6 +1,6 @@
 import { fromPairs, identity } from 'ramda'
 
-import { DEFAULT_LOAD_NAME, capitalize, upperSnakeCase } from '../../helpers/quarks'
+import { DEFAULT_LOAD_NAME, capitalize, upperSnakeCase } from '../../utils/helpers/quarks'
 
 export const resolveActionNaming = ({ valueKey, loadName = DEFAULT_LOAD_NAME }) => ({
   // action type or type suffices
