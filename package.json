@@ -1,6 +1,6 @@
 {
-  "name": "redux-kit",
-  "version": "2.0.0",
+  "name": "@earlorg/redux-kit",
+  "version": "1.0.0",
   "main": "dist/lib/index.js",
   "module": "es/index.js",
   "license": "MIT",
