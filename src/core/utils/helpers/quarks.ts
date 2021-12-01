@@ -4,6 +4,8 @@ import {
 import { snakeCase } from 'lodash-es'
 
 export const DEFAULT_LOAD_NAME = 'load'
+export const DEFAULT_UPDATE_NAME = 'update'
+export const DEFAULT_REMOVE_NAME = 'remove'
 
 export const capitalize = (string) => {
   if (!string) {

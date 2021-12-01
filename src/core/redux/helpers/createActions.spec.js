@@ -1,5 +1,5 @@
 /* eslint-disable no-console */
-import { createActions, actionCreatorFactory } from './createActions'
+import { createActions, actionCreatorFactory, resolveActionNaming, resolveStateNaming } from './createActions'
 
 describe('createActions helper', () => {
   it('should create simple `data` action and Co.', () => {
@@ -132,5 +132,18 @@ describe('createActions helper', () => {
 
     expect(homeLoaded(['result1', 'result2'])).toEqual({ type: 'HOME_LOADED', data: ['result1', 'result2'] })
     expect(homeLoadFailed('jako ze error')).toEqual({ type: 'HOME_LOAD_FAILED', thisIsError: 'jako ze error' })
+  })
+
+  it('shoudl test naming', (done) => {
+    const naming = resolveActionNaming({ valueKey: 'posts' })
+    const stateNaming = resolveStateNaming({ valueKey: 'posts' })
+
+    console.log(naming)
+    console.log(stateNaming)
+
+    expect(naming.actionLoad).toEqual('loadPosts')
+    expect(naming.actionLoaded).toEqual('postsDataLoaded')
+
+    done()
   })
 })
