@@ -7,41 +7,113 @@ import jsonPlugin from 'rollup-plugin-json'
 
 const extensions = ['.js', '.jsx', '.ts', '.tsx']
 
-export default {
-  input: ['src/index.ts', 'src/core/redux/index.ts', 'src/core/utils/index.ts'],
-  output: [
-    {
-      dir: 'dist/lib/cjs',
-      format: 'cjs',
-      sourcemap: true,
+export default [
+  {
+    input: ['src/index.ts'],
+    output: [
+      {
+        dir: 'dist/lib/cjs',
+        format: 'cjs',
+        sourcemap: true,
+      },
+      {
+        dir: 'dist/lib/esm',
+        format: 'es',
+        sourcemap: true,
+      },
+    ],
+    plugins: [
+      resolvePlugin({
+        extensions,
+      }),
+      babelPlugin({
+        extensions,
+        exclude: 'node_modules/**',
+      }),
+      jsonPlugin(),
+      commonjsPlugin(),
+    ],
+    external: [
+      'redux',
+      'redux-saga',
+      'reselect',
+      'ramda',
+      'lodash-es',
+    ],
+    watch: {
+      include: 'src/**',
     },
-    {
-      dir: 'dist/lib/esm',
-      format: 'es',
-      sourcemap: true,
-    },
-  ],
-  plugins: [
-    resolvePlugin({
-      extensions,
-    }),
-
-    babelPlugin({
-      extensions,
-      exclude: 'node_modules/**',
-    }),
-    jsonPlugin(),
-    commonjsPlugin(),
-  ],
-  external: [
-    'redux',
-    'redux-saga',
-    'reselect',
-    'react-select',
-    'ramda',
-    'lodash-es',
-  ],
-  watch: {
-    include: 'src/**',
   },
-}
+  {
+    input: ['src/core/redux/index.ts'],
+    output: [
+      {
+        dir: 'dist/redux',
+        format: 'cjs',
+        sourcemap: true,
+      },
+      {
+        dir: 'dist/redux/esm',
+        format: 'es',
+        sourcemap: true,
+      },
+    ],
+    plugins: [
+      resolvePlugin({
+        extensions,
+      }),
+      babelPlugin({
+        extensions,
+        exclude: 'node_modules/**',
+      }),
+      jsonPlugin(),
+      commonjsPlugin(),
+    ],
+    external: [
+      'redux',
+      'redux-saga',
+      'reselect',
+      'ramda',
+      'lodash-es',
+    ],
+    watch: {
+      include: 'src/**',
+    },
+  },
+  {
+    input: ['src/core/utils/index.ts'],
+    output: [
+      {
+        dir: 'dist/utils',
+        format: 'cjs',
+        sourcemap: true,
+      },
+      {
+        dir: 'dist/utils/esm',
+        format: 'es',
+        sourcemap: true,
+      },
+    ],
+    plugins: [
+      resolvePlugin({
+        extensions,
+      }),
+      babelPlugin({
+        extensions,
+        exclude: 'node_modules/**',
+      }),
+      jsonPlugin(),
+      commonjsPlugin(),
+    ],
+    external: [
+      'redux',
+      'redux-saga',
+      'reselect',
+      'ramda',
+      'lodash-es',
+    ],
+    watch: {
+      include: 'src/**',
+    },
+  },
+]

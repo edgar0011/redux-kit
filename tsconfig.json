@@ -4,7 +4,7 @@
     "allowSyntheticDefaultImports": true,
     "declaration": true,
     "declarationDir": "dist/types",
-    "outDir": "./dist/lib",
+    "outDir": "./dist/libts",
     "sourceMap": false,
     "experimentalDecorators": true,
     "jsx": "react",

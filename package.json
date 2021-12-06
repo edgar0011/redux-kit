@@ -8,6 +8,16 @@
     "type": "git",
     "url": "https://github.com/edgar0011/redux-kit"
   },
+  "files": [
+    "dist"
+  ],
+  "exports": {
+    ".": "./dist/lib/cjs/index.js",
+    "./redux": "./dist/redux/index.js",
+    "./utils": "./dist/utils/index.js",
+    "./esm/redux": "./dist/redux/esm/index.js",
+    "./esm/utils": "./dist/utils/esm/index.js"
+  },
   "scripts": {
     "prepare": "husky install",
     "prepublish": "yarn clean && yarn build:lib",

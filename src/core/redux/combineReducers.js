@@ -1,4 +1,4 @@
-import { isPlainObject } from 'lodash-es'
+import isPlainObject from 'lodash-es/isPlainObject'
 
 export const ActionTypes = {
   INIT: '@@redux/EARL_INIT',

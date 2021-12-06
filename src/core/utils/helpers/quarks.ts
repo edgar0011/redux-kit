@@ -1,7 +1,7 @@
 import {
   replace, head, toUpper, concat, tail, pipe,
 } from 'ramda'
-import { snakeCase } from 'lodash-es'
+import snakeCase from 'lodash-es/snakeCase'
 
 export const DEFAULT_LOAD_NAME = 'load'
 export const DEFAULT_UPDATE_NAME = 'update'
