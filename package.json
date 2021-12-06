@@ -90,7 +90,8 @@
     ],
     "moduleNameMapper": {
       "\\.(jpg|jpeg|png|gif|eot|otf|webp|svg|ttf|woff|woff2|mp4|webm|wav|mp3|m4a|aac|oga|css|pdf)$": "<rootDir>/test/file-mock.js",
-      "^lodash-es$": "lodash"
+      "^lodash-es$": "lodash",
+      "^lodash-es/(.*)": "lodash/$1"
     },
     "verbose": true,
     "transform": {

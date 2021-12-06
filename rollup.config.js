@@ -7,6 +7,30 @@ import jsonPlugin from 'rollup-plugin-json'
 
 const extensions = ['.js', '.jsx', '.ts', '.tsx']
 
+const commonConfig = {
+  plugins: [
+    resolvePlugin({
+      extensions,
+    }),
+    babelPlugin({
+      extensions,
+      exclude: 'node_modules/**',
+    }),
+    jsonPlugin(),
+    commonjsPlugin(),
+  ],
+  external: [
+    'redux',
+    'redux-saga',
+    'reselect',
+    'ramda',
+    'lodash-es',
+  ],
+  watch: {
+    include: 'src/**',
+  },
+}
+
 export default [
   {
     input: ['src/index.ts'],
@@ -22,27 +46,7 @@ export default [
         sourcemap: true,
       },
     ],
-    plugins: [
-      resolvePlugin({
-        extensions,
-      }),
-      babelPlugin({
-        extensions,
-        exclude: 'node_modules/**',
-      }),
-      jsonPlugin(),
-      commonjsPlugin(),
-    ],
-    external: [
-      'redux',
-      'redux-saga',
-      'reselect',
-      'ramda',
-      'lodash-es',
-    ],
-    watch: {
-      include: 'src/**',
-    },
+    ...commonConfig,
   },
   {
     input: ['src/core/redux/index.ts'],
@@ -58,27 +62,7 @@ export default [
         sourcemap: true,
       },
     ],
-    plugins: [
-      resolvePlugin({
-        extensions,
-      }),
-      babelPlugin({
-        extensions,
-        exclude: 'node_modules/**',
-      }),
-      jsonPlugin(),
-      commonjsPlugin(),
-    ],
-    external: [
-      'redux',
-      'redux-saga',
-      'reselect',
-      'ramda',
-      'lodash-es',
-    ],
-    watch: {
-      include: 'src/**',
-    },
+    ...commonConfig,
   },
   {
     input: ['src/core/utils/index.ts'],
@@ -94,26 +78,6 @@ export default [
         sourcemap: true,
       },
     ],
-    plugins: [
-      resolvePlugin({
-        extensions,
-      }),
-      babelPlugin({
-        extensions,
-        exclude: 'node_modules/**',
-      }),
-      jsonPlugin(),
-      commonjsPlugin(),
-    ],
-    external: [
-      'redux',
-      'redux-saga',
-      'reselect',
-      'ramda',
-      'lodash-es',
-    ],
-    watch: {
-      include: 'src/**',
-    },
+    ...commonConfig,
   },
 ]
