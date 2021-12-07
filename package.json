@@ -1,6 +1,6 @@
 {
   "name": "@earlorg/redux-kit",
-  "version": "1.0.6",
+  "version": "1.1.0",
   "main": "dist/lib/cjs/index.js",
   "module": "dist/lib/esm/index.js",
   "license": "MIT",
@@ -13,11 +13,11 @@
   ],
   "exports": {
     ".": "./dist/lib/cjs/index.js",
-     "./redux":  {
+    "./redux": {
       "import": "./dist/redux/esm/index.js",
       "require": "./dist/redux/index.js"
     },
-    "./utils":  {
+    "./utils": {
       "import": "./dist/utils/esm/index.js",
       "require": "./dist/utils/index.js"
     }
