@@ -13,10 +13,14 @@
   ],
   "exports": {
     ".": "./dist/lib/cjs/index.js",
-    "./redux": "./dist/redux/index.js",
-    "./utils": "./dist/utils/index.js",
-    "./esm/redux": "./dist/redux/esm/index.js",
-    "./esm/utils": "./dist/utils/esm/index.js"
+     "./redux":  {
+      "import": "./dist/redux/esm/index.js",
+      "require": "./dist/redux/index.js"
+    },
+    "./utils":  {
+      "import": "./dist/utils/esm/index.js",
+      "require": "./dist/utils/index.js"
+    }
   },
   "scripts": {
     "prepare": "husky install",
