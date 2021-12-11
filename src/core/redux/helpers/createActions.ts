@@ -7,6 +7,11 @@ import {
   capitalize,
   upperSnakeCase,
 } from '../../utils/helpers/quarks'
+import { Params } from '../types'
+
+export type Action = {
+  type: string
+}
 
 export const resolveActionNaming = ({
   valueKey,
@@ -45,12 +50,12 @@ export const resolveStateNaming = ({ valueKey }: { valueKey: string }): Record<s
   removeError: `${valueKey}RemoveError`,
 })
 
-export const resolveNaming = ({ valueKey, loadName = DEFAULT_LOAD_NAME }) => ({
+export const resolveNaming = ({ valueKey, loadName = DEFAULT_LOAD_NAME }: { valueKey: string; loadName: string }) => ({
   ...resolveActionNaming({ valueKey, loadName }),
   ...resolveStateNaming({ valueKey }),
 })
 
-export const actionType = (path, key) => {
+export const actionType = (path: string | string[], key: string) => {
   const prefix = Array.isArray(path) ? path.join(' ') : path
   const type = upperSnakeCase(`${prefix} ${key}`)
   return type
@@ -62,21 +67,26 @@ export type ActionCreator = {
 }
 
 // TODO simple action creator, merge with createActionCreator ...
-export const actionCreatorFactory = (type, paramName, paramsResolver, path = ''): ActionCreator => {
+export const actionCreatorFactory
+= (
+  type: string, paramName: string | null, paramsResolver: (...args: Params) => void, path: string | string[] = '',
+): ActionCreator => {
   const upperActionType = actionType(path, type)
-  const creator = (...params) => {
+  const creator = (...params: Params) => {
     const normalizedParams = params
       && Array.isArray(params)
       && params.length === 1
       ? params[0]
       : params
 
-    let action = {
+    let action: Record<string, unknown> = {
       type: upperActionType,
     }
     if (paramsResolver) {
       action = {
         ...action,
+        // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+        // @ts-ignore
         ...paramsResolver(...params),
       }
     } else if (paramName) {
@@ -92,11 +102,26 @@ export const actionCreatorFactory = (type, paramName, paramsResolver, path = '')
   return creator
 }
 
-const createActionCreator = ({ type, paramsResolver = identity, path = '' }): ActionCreator => (
+const createActionCreator = (
+  { type, paramsResolver = identity, path = '' }:
+  { type: string; paramsResolver?: <T>(a: T) => T; path: string | string[] },
+): ActionCreator => (
   actionCreatorFactory(type, null, paramsResolver, path)
 )
 
-export const createActions = ({ valueKey, typeParamsResolverMap = {}, loadName = DEFAULT_LOAD_NAME, path }) => {
+type ActaionCreaterParams = {
+  valueKey: string
+  typeParamsResolverMap: Record<string, <T>(a: T) => T>
+  loadName: string
+  path: string | string[]
+}
+
+export const createActions = ({
+  valueKey,
+  typeParamsResolverMap = {},
+  loadName = DEFAULT_LOAD_NAME,
+  path,
+}: ActaionCreaterParams) => {
   const actionTypes = resolveActionNaming({ valueKey, loadName })
   const actionCreators: [string, ActionCreator][] = Object.values(actionTypes).map((type) => (
     [type, createActionCreator({ type, paramsResolver: typeParamsResolverMap[type], path })]
@@ -105,12 +130,15 @@ export const createActions = ({ valueKey, typeParamsResolverMap = {}, loadName =
   const actions = fromPairs(actionCreators)
   return {
     ...actions,
+    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+    // @ts-ignore
     ...fromPairs(actionCreatorsByType),
   }
 }
 
-export const actionNames = (actions) => Object.keys(actions)
-export const actionTypes = (actions) => Object.values(actions).map(({ type }) => type)
+export const actionNames = (actions: Record<string, Action>): string[] => Object.keys(actions)
+export const actionTypes
+= (actions: Record<string, Action>): string[] => Object.values(actions).map(({ type }:{ type: string }) => type)
 
-export const actionDataTemplate = (data) => ({ data })
-export const actionErrorTemplate = (error) => ({ error })
+export const actionDataTemplate = (data: unknown) => ({ data })
+export const actionErrorTemplate = (error: unknown) => ({ error })
