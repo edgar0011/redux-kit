@@ -38,12 +38,14 @@ it('says HELLO', () => {
     log: jest.fn(),
   }
 
-  const mockedCall = sayHello(mockLogger) // eslint-disable-line
+  const mockedCall: void = sayHello(mockLogger)
 
-  console.log(mockLogger.log) // eslint-disable-line
+  console.log(mockedCall)
+  console.log('mockedCall')
+  console.log(mockLogger.log)
   if (typeof mockLogger.log !== 'function') {
-    console.log(mockLogger.log.mock) // eslint-disable-line
-    console.log(mockLogger.log.mock.calls) // eslint-disable-line
+    console.log(mockLogger.log.mock)
+    console.log(mockLogger.log.mock.calls)
   }
 
   expect(mockLogger.log).toHaveBeenCalledWith(props.message)

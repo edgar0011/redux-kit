@@ -7,7 +7,7 @@ export const DEFAULT_LOAD_NAME = 'load'
 export const DEFAULT_UPDATE_NAME = 'update'
 export const DEFAULT_REMOVE_NAME = 'remove'
 
-export const capitalize = (string) => {
+export const capitalize = (string: string) => {
   if (!string) {
     return ''
   }
@@ -15,7 +15,7 @@ export const capitalize = (string) => {
   return replace(firstLetter, toUpper(firstLetter), string)
 }
 
-export const capitalize2 = (string) => (!string ? '' : concat(
+export const capitalize2 = (string: string) => (!string ? '' : concat(
   toUpper(head(string)), tail(string),
 ))
 
