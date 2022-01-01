@@ -6,7 +6,7 @@ import {
   DEFAULT_REMOVE_NAME,
   capitalize,
   upperSnakeCase,
-} from '../../utils/helpers/quarks'
+} from '../../utils/quarks'
 import { Params } from '../types'
 
 export type Action = {
