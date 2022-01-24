@@ -15,12 +15,17 @@ describe('createActions helper', () => {
     // console.log(Object.values(actions).map(({ type }) => type))
     // console.log(actions.loadUser)
 
+    expect(actions.user).toBeDefined()
+    expect(actions.user.name).toEqual('user')
+    expect(actions.user.type).toEqual('USER')
+    expect(actions.user).toEqual(actions.USER)
+
     expect(actions.loadUser).toBeDefined()
     expect(actions.loadUser.name).toEqual('loadUser')
     expect(actions.loadUser.type).toEqual('LOAD_USER')
-
     expect(actions.loadUser).toEqual(actions.LOAD_USER)
 
+    console.log(actions.loadUser.toString())
     console.log(actions.loadUser('token'))
 
     expect(actions.loadUser('token').actionLoadUserParams).toEqual('token')

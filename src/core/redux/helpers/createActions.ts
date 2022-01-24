@@ -21,6 +21,7 @@ export const resolveActionNaming = ({
 }: Record<string, string>): Record<string, string> => ({
   // action type or type suffices
   // Load
+  actionLoadDefault: `${valueKey}`,
   actionLoad: `${loadName}${capitalize(valueKey)}`,
   actionLoaded: `${valueKey}DataLoaded`,
   actionLoadError: `${valueKey}LoadError`,
