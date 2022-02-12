@@ -1,9 +1,10 @@
-import { fromPairs } from 'ramda'
+import { fromPairs, identity } from 'ramda'
 
 import {
   DEFAULT_LOAD_NAME,
   DEFAULT_UPDATE_NAME,
   DEFAULT_REMOVE_NAME,
+  DEFAULT_ACTON_PAYLOAD_NAME,
   capitalize,
   upperSnakeCase,
 } from '../../utils/quarks'
@@ -91,6 +92,18 @@ export const actionCreatorFactory
       }
     } else if (paramName) {
       action[paramName] = normalizedParams
+    } else {
+      action = {
+        ...action,
+        // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+        // @ts-ignore
+        ...(
+          typeof normalizedParams === 'object'
+            ? normalizedParams
+            : {
+              [DEFAULT_ACTON_PAYLOAD_NAME]: normalizedParams,
+            }),
+      }
     }
     return action
   }

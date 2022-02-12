@@ -6,6 +6,7 @@ import snakeCase from 'lodash-es/snakeCase'
 export const DEFAULT_LOAD_NAME = 'load'
 export const DEFAULT_UPDATE_NAME = 'update'
 export const DEFAULT_REMOVE_NAME = 'remove'
+export const DEFAULT_ACTON_PAYLOAD_NAME = 'payload'
 
 export const capitalize = (string: string) => {
   if (!string) {

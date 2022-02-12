@@ -160,6 +160,17 @@ describe('createActions helper', () => {
 
     expect(naming.actionLoad).toEqual('loadPosts')
     expect(naming.actionLoaded).toEqual('postsDataLoaded')
+    done()
+  })
+
+  it('shoudl test simpels laod action', (done) => {
+    const actions = createActions({ valueKey: 'load' })
+
+    console.log(actions)
+
+    expect(actions.load({ item: 'address', userId: 1 })).toEqual({ type: 'LOAD', item: 'address', userId: 1 })
+
+    expect(actions.load('allusers')).toEqual({ type: 'LOAD', payload: 'allusers' })
 
     done()
   })
