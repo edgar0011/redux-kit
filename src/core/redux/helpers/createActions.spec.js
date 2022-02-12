@@ -1,5 +1,8 @@
 /* eslint-disable no-console */
-import { createActions, actionCreatorFactory, resolveActionNaming, resolveStateNaming } from './createActions'
+import {
+  createActions, createActionCreator, actionCreatorFactory,
+  resolveActionNaming, resolveStateNaming,
+} from './createActions'
 
 describe('createActions helper', () => {
   it('should create simple `data` action and Co.', () => {
@@ -19,6 +22,8 @@ describe('createActions helper', () => {
     expect(actions.user.name).toEqual('user')
     expect(actions.user.type).toEqual('USER')
     expect(actions.user).toEqual(actions.USER)
+
+    console.log(actions.user({ userName: 'Karel' }))
 
     expect(actions.loadUser).toBeDefined()
     expect(actions.loadUser.name).toEqual('loadUser')
@@ -128,15 +133,22 @@ describe('createActions helper', () => {
     const loadHome = actionCreatorFactory('loadHome')
     const homeLoaded = actionCreatorFactory('homeLoaded', 'data')
     const homeLoadFailed = actionCreatorFactory(
-      'homeLoadFailed', 'error', (error) => ({ thisIsError: error }),
+      'homeLoadFailed', null, (error) => ({ thisIsError: error }),
     )
+    const homeLoadFailed2 = createActionCreator({
+      type: 'homeLoadFailed', paramName: 'error',
+    })
 
     console.log('loadHome', loadHome)
     console.log('homeLoaded', homeLoaded)
     console.log('homeLoadFailed', homeLoadFailed)
 
+    console.log("homeLoadFaile2d('jako ze error')")
+    console.log(homeLoadFailed2('jako ze error'))
+
     expect(homeLoaded(['result1', 'result2'])).toEqual({ type: 'HOME_LOADED', data: ['result1', 'result2'] })
     expect(homeLoadFailed('jako ze error')).toEqual({ type: 'HOME_LOAD_FAILED', thisIsError: 'jako ze error' })
+    expect(homeLoadFailed2('jako ze error')).toEqual({ type: 'HOME_LOAD_FAILED', error: 'jako ze error' })
   })
 
   it('shoudl test naming', (done) => {
