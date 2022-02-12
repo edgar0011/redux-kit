@@ -1,4 +1,4 @@
-import { fromPairs, identity } from 'ramda'
+import { fromPairs } from 'ramda'
 
 import {
   DEFAULT_LOAD_NAME,
@@ -7,7 +7,7 @@ import {
   capitalize,
   upperSnakeCase,
 } from '../../utils/quarks'
-import { Params } from '../types'
+import { Param, Params } from '../types'
 
 export type Action = {
   type: string
@@ -70,15 +70,14 @@ export type ActionCreator = {
 // TODO simple action creator, merge with createActionCreator ...
 export const actionCreatorFactory
 = (
-  type: string, paramName: string | null, paramsResolver: (...args: Params) => void, path: string | string[] = '',
+  type: string,
+  paramName?: string | null,
+  paramsResolver?: null | ((...args: Params) => void),
+  path: string | string[] = '',
 ): ActionCreator => {
   const upperActionType = actionType(path, type)
-  const creator = (...params: Params) => {
-    const normalizedParams = params
-      && Array.isArray(params)
-      && params.length === 1
-      ? params[0]
-      : params
+  const creator = (firstArg: Param, ...rest: Params) => {
+    const normalizedParams = (firstArg && rest.length) ? [firstArg, ...rest] : firstArg
 
     let action: Record<string, unknown> = {
       type: upperActionType,
@@ -88,7 +87,7 @@ export const actionCreatorFactory
         ...action,
         // eslint-disable-next-line @typescript-eslint/ban-ts-comment
         // @ts-ignore
-        ...paramsResolver(...params),
+        ...paramsResolver(...[firstArg, ...rest]),
       }
     } else if (paramName) {
       action[paramName] = normalizedParams
@@ -103,11 +102,12 @@ export const actionCreatorFactory
   return creator
 }
 
-const createActionCreator = (
-  { type, paramsResolver = identity, path = '' }:
-  { type: string; paramsResolver?: <T>(a: T) => T; path: string | string[] },
+// JUST a formal wrapper, with dto instead of params
+export const createActionCreator = (
+  { type, paramName, paramsResolver, path = '' }:
+  { type: string; paramName?: string | null; paramsResolver?: null | (<T>(a: T) => T); path: string | string[] },
 ): ActionCreator => (
-  actionCreatorFactory(type, null, paramsResolver, path)
+  actionCreatorFactory(type, paramName, paramsResolver, path)
 )
 
 type ActaionCreaterParams = {
