@@ -1,4 +1,4 @@
-import { fromPairs, identity } from 'ramda'
+import { fromPairs } from 'ramda'
 
 import {
   DEFAULT_LOAD_NAME,
