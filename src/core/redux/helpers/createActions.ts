@@ -136,7 +136,7 @@ export const createActions = ({
   loadName = DEFAULT_LOAD_NAME,
   path,
 }: ActaionCreaterParams) => {
-  const actionTypes = resolveActionNaming({ valueKey, loadName })
+  const actionTypes = typeof valueKey === 'string' ? resolveActionNaming({ valueKey, loadName }) : valueKey
   const actionCreators: [string, ActionCreator][] = Object.values(actionTypes).map((type) => (
     [type, createActionCreator({ type, paramsResolver: typeParamsResolverMap[type], path })]
   ))

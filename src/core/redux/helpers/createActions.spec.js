@@ -163,7 +163,8 @@ describe('createActions helper', () => {
     done()
   })
 
-  it('shoudl test simpels laod action', (done) => {
+  // SMPLIFIED API, USAGE
+  it('shoudl test simple load action', (done) => {
     const actions = createActions({ valueKey: 'load' })
 
     console.log(actions)
@@ -171,6 +172,38 @@ describe('createActions helper', () => {
     expect(actions.load({ item: 'address', userId: 1 })).toEqual({ type: 'LOAD', item: 'address', userId: 1 })
 
     expect(actions.load('allusers')).toEqual({ type: 'LOAD', payload: 'allusers' })
+
+    done()
+  })
+
+  it('shoudl test simple select action', (done) => {
+    const selectAction = createActionCreator({
+      type: 'select',
+    })
+
+    console.log(selectAction)
+    console.log({ [selectAction]: selectAction })
+    console.log({ [selectAction.name]: selectAction })
+
+    expect(selectAction({ item: 'address', userId: 1 })).toEqual({ type: 'SELECT', item: 'address', userId: 1 })
+
+    expect(selectAction('allusers')).toEqual({ type: 'SELECT', payload: 'allusers' })
+
+    done()
+  })
+
+  it('shoudl test simple multiple action created at once', (done) => {
+    const actions = createActions({ valueKey: ['select', 'remove', 'sort'] })
+
+    console.log(actions)
+
+    expect(actions.select({ item: 'address', userId: 1 })).toEqual({ type: 'SELECT', item: 'address', userId: 1 })
+
+    expect(actions.select('allusers')).toEqual({ type: 'SELECT', payload: 'allusers' })
+
+    expect(actions.remove({ item: 'address', userId: 1 })).toEqual({ type: 'REMOVE', item: 'address', userId: 1 })
+
+    expect(actions.remove('allusers')).toEqual({ type: 'REMOVE', payload: 'allusers' })
 
     done()
   })
