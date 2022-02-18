@@ -1,6 +1,8 @@
-import { all, takeLatest, call, getContext } from 'redux-saga/effects'
+import { all, takeLatest, debounce, throttle, call, getContext } from 'redux-saga/effects'
 
-export const createSaga = (action, trigger = takeLatest, sagaFn, contextKeys) => {
+// TODO test, then move to redux-kit
+
+export const createSaga = (action, trigger = takeLatest, sagaFn, contextKeys, ms = 1000) => {
   const nameWatcher = `${action}SagaWatcher`
   const name = `${action}Saga`
   const sagaWatcher = function* sagaWatcher() {
@@ -15,7 +17,11 @@ export const createSaga = (action, trigger = takeLatest, sagaFn, contextKeys) =>
     saga.toString = function toString () {
       return this.name
     }
-    yield trigger(action, saga)
+    if (trigger === debounce || trigger === throttle) {
+      yield trigger(ms, action, saga)
+    } else {
+      yield trigger(action, saga)
+    }
   }
   Object.defineProperty(sagaWatcher, 'name', { value: nameWatcher, configurable: true })
   sagaWatcher.toString = function toString () {
