@@ -1,7 +1,5 @@
 import { all, takeLatest, debounce, throttle, call, getContext } from 'redux-saga/effects'
 
-// TODO test, then move to redux-kit
-
 export const createSaga = (action, trigger = takeLatest, sagaFn, contextKeys, ms = 1000) => {
   const nameWatcher = `${action}SagaWatcher`
   const name = `${action}Saga`
