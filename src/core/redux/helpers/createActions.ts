@@ -7,6 +7,7 @@ import {
   DEFAULT_ACTON_PAYLOAD_NAME,
   capitalize,
   upperSnakeCase,
+  camelCase,
 } from '../../utils/quarks'
 import { Param, Params } from '../types'
 
@@ -58,9 +59,13 @@ export const resolveNaming = ({ valueKey, loadName = DEFAULT_LOAD_NAME }: { valu
 })
 
 export const actionType = (path: string | string[], key: string) => {
-  const prefix = Array.isArray(path) ? path.join(' ') : path
-  const type = upperSnakeCase(`${prefix} ${key}`)
-  return type
+  const prefix = Array.isArray(path) ? path.join(' ') : (path || '')
+  return upperSnakeCase(`${prefix} ${key}`)
+}
+
+export const actionName = (path: string | string[], key: string) => {
+  const prefix = Array.isArray(path) ? path.join(' ') : (path || '')
+  return camelCase(`${prefix} ${key}`)
 }
 
 export type ActionCreator = {
@@ -108,7 +113,7 @@ export const actionCreatorFactory
     return action
   }
   creator.type = upperActionType
-  Object.defineProperty(creator, 'name', { value: type, configurable: true })
+  Object.defineProperty(creator, 'name', { value: actionName(path, type), configurable: true })
   creator.toString = function toString () {
     return this.type
   }
@@ -138,6 +143,8 @@ export const createActions = ({
 }: ActaionCreaterParams) => {
   const actionTypes = typeof valueKey === 'string' ? resolveActionNaming({ valueKey, loadName }) : valueKey
   const actionCreators: [string, ActionCreator][] = Object.values(actionTypes).map((type) => (
+    // Here could be change: actionName(path, type)
+    // so that properties on ActionObejct have same value as name of action creator
     [type, createActionCreator({ type, paramsResolver: typeParamsResolverMap[type], path })]
   ))
   const actionCreatorsByType = actionCreators.map(([, creator]) => ([creator.type, creator]))

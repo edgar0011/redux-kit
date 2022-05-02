@@ -61,7 +61,7 @@ describe('createActions helper', () => {
     console.log(actions.SEARCH_LOAD_ITEMS)
 
     expect(actions.loadItems).toBeDefined()
-    expect(actions.loadItems.name).toEqual('loadItems')
+    expect(actions.loadItems.name).toEqual('searchLoadItems')
     expect(actions.loadItems.toString()).toEqual(actions.loadItems.type)
     expect(actions.loadItems.type).toEqual('SEARCH_LOAD_ITEMS')
     expect(`${actions.loadItems}`).toEqual('SEARCH_LOAD_ITEMS')
@@ -110,8 +110,8 @@ describe('createActions helper', () => {
       },
     })
 
-    // console.log(actions)
-    // console.log(actions.loadSearch)
+    console.log(actions)
+    console.log(actions.loadSearch)
 
     // console.log({
     //   [actions.loadSearch]: 'hello',

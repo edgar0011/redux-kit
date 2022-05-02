@@ -66,6 +66,7 @@ export const createStore = (
     }
     return false
   }
+
   const stopSaga = (saga: Saga, name: string) => {
     const derivedName = name || saga.name
     if (store.sagaTasks[derivedName]) {
