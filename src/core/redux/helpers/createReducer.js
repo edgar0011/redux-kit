@@ -10,6 +10,7 @@ export const createReducer = (actionHandlers, initialState = {}) => (
   state = initialState, action, appState = state,
 ) => {
   const handler = actionHandlers[action.type]
+
   return handler ? handler(state, action, appState) : state
 }
 

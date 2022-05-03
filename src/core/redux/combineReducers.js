@@ -75,6 +75,7 @@ function assertReducerSanity (reducers) {
 
     const type = `@@redux/PROBE_UNKNOWN_ACTION_${Math.random().toString(36).substring(7).split('')
       .join('.')}`
+
     if (typeof reducer(undefined, { type }) === 'undefined') {
       throw new Error(
         `Reducer "${key}" returned undefined when probed with a random type. `
@@ -107,6 +108,7 @@ function assertReducerSanity (reducers) {
 export default function combineReducers (reducers) {
   const reducerKeys = Object.keys(reducers)
   const finalReducers = {}
+
   for (let i = 0; i < reducerKeys.length; i += 1) {
     const key = reducerKeys[i]
 
@@ -122,11 +124,13 @@ export default function combineReducers (reducers) {
   }
   const finalReducerKeys = Object.keys(finalReducers)
   let unexpectedKeyCache
+
   if (process.env.NODE_ENV !== 'production') {
     unexpectedKeyCache = {}
   }
 
   let sanityError
+
   try {
     assertReducerSanity(finalReducers)
   } catch (e) {
@@ -140,6 +144,7 @@ export default function combineReducers (reducers) {
 
     if (process.env.NODE_ENV !== 'production') {
       const warningMessage = getUnexpectedStateShapeWarningMessage(state, finalReducers, action, unexpectedKeyCache)
+
       if (warningMessage) {
         warning(warningMessage)
       }
@@ -147,13 +152,16 @@ export default function combineReducers (reducers) {
 
     let hasChanged = false
     const nextState = {}
+
     for (let i = 0; i < finalReducerKeys.length; i += 1) {
       const key = finalReducerKeys[i]
       const reducer = finalReducers[key]
       const previousStateForKey = state[key]
       const nextStateForKey = reducer(previousStateForKey, action, appState)
+
       if (typeof nextStateForKey === 'undefined') {
         const errorMessage = getUndefinedStateErrorMessage(key, action)
+
         throw new Error(errorMessage)
       }
       nextState[key] = nextStateForKey

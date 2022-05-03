@@ -14,6 +14,7 @@ export const capitalize = (value: string) => {
     return ''
   }
   const firstLetter = head(value)
+
   return replace(firstLetter, toUpper(firstLetter), value)
 }
 

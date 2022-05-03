@@ -6,11 +6,13 @@ export const createSaga = (action, trigger = takeLatest, sagaFn, contextKeys, ms
   const sagaWatcher = function* sagaWatcher() {
     const saga = function* saga(action) {
       let contexts
+
       if (contextKeys) {
         contexts = yield all(contextKeys.map((key) => getContext(key)))
       }
       yield call(sagaFn, action, contexts)
     }
+
     Object.defineProperty(saga, 'name', { value: name, configurable: true })
     saga.toString = function toString () {
       return this.name
@@ -24,6 +26,7 @@ export const createSaga = (action, trigger = takeLatest, sagaFn, contextKeys, ms
       yield trigger(action, saga)
     }
   }
+
   Object.defineProperty(sagaWatcher, 'name', { value: nameWatcher, configurable: true })
   sagaWatcher.toString = function toString () {
     return this.name

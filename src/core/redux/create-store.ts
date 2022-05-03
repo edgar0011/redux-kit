@@ -54,6 +54,7 @@ export const createStore = (
 
   const runSaga = (saga: Saga, name: null | string = null, params?: Params | null) => {
     const derivedName = name || saga.name
+
     console.log('runSaga')
     console.log('saga, name, params')
     console.log(saga, name, params)
@@ -69,8 +70,10 @@ export const createStore = (
 
   const stopSaga = (saga: Saga, name: string) => {
     const derivedName = name || saga.name
+
     if (store.sagaTasks[derivedName]) {
       const task = store.sagaTasks[derivedName]
+
       if (task && (!task.isRunning() || task.isCancelled())) {
         store.sagaTasks[derivedName] = null
         return

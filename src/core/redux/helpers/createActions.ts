@@ -60,11 +60,13 @@ export const resolveNaming = ({ valueKey, loadName = DEFAULT_LOAD_NAME }: { valu
 
 export const actionType = (path: string | string[], key: string) => {
   const prefix = Array.isArray(path) ? path.join(' ') : (path || '')
+
   return upperSnakeCase(`${prefix} ${key}`)
 }
 
 export const actionName = (path: string | string[], key: string) => {
   const prefix = Array.isArray(path) ? path.join(' ') : (path || '')
+
   return camelCase(`${prefix} ${key}`)
 }
 
@@ -88,6 +90,7 @@ export const actionCreatorFactory
     let action: Record<string, unknown> = {
       type: upperActionType,
     }
+
     if (paramsResolver) {
       action = {
         ...action,
@@ -112,6 +115,7 @@ export const actionCreatorFactory
     }
     return action
   }
+
   creator.type = upperActionType
   Object.defineProperty(creator, 'name', { value: actionName(path, type), configurable: true })
   creator.toString = function toString () {
@@ -149,6 +153,7 @@ export const createActions = ({
   ))
   const actionCreatorsByType = actionCreators.map(([, creator]) => ([creator.type, creator]))
   const actions = fromPairs(actionCreators)
+
   return {
     ...actions,
     // eslint-disable-next-line @typescript-eslint/ban-ts-comment
