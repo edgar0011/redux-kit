@@ -37,11 +37,15 @@ type SagaOptions = {
 export const createStore = (
   reducer: Reducer<unknown, Action<any>>, middlewares: Middleware[], options: Options,
 ): Store => {
-  const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__
-    ? window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__({
-      shouldHotReload: false,
-    })
-    : compose
+  // eslint-disable-next-line no-nested-ternary
+  const composeEnhancers = (typeof window === 'undefined')
+    ? compose
+    : (window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__
+      ? window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__({
+        shouldHotReload: false,
+      })
+      : compose)
+
   const store = createReduxStore(
     reducer,
     options.initialState || {},
