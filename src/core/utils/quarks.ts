@@ -9,11 +9,12 @@ export const DEFAULT_UPDATE_NAME = 'update'
 export const DEFAULT_REMOVE_NAME = 'remove'
 export const DEFAULT_ACTON_PAYLOAD_NAME = 'payload'
 
-export const capitalize = (value: string) => {
+export const capitalize = (value: string, num: number) => {
   if (!value) {
     return ''
   }
-  const firstLetter = head(value)
+
+  const firstLetter = !num ? head(value) : value.substr(0, num)
 
   return replace(firstLetter, toUpper(firstLetter), value)
 }

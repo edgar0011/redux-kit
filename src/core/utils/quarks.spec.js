@@ -4,6 +4,14 @@ describe('capialize', () => {
   it('should capitalize words', () => {
     expect(capitalize('hello')).toEqual('Hello')
   })
+
+  it('should capitalize words, correctly', () => {
+    expect(capitalize('aaBbAaBAbABAB')).toEqual('AaBbAaBAbABAB')
+  })
+
+  it('should capitalize words, more then forst letter', () => {
+    expect(capitalize('aaBbAaBAbABAB', 4)).toEqual('AABBAaBAbABAB')
+  })
 })
 
 describe('capitalize2', () => {
