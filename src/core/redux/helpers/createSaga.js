@@ -19,9 +19,9 @@ export const createSaga = (action, trigger = takeLatest, sagaFn, contextKeys, ms
     }
 
     if (trigger === 'debounce' || trigger === debounce || trigger?.name?.indexOf('debounce') === 0) {
-      yield debounce(ms, action, saga)
+      yield (trigger === 'debounce' ? debounce : trigger)(ms, action, saga)
     } else if (trigger === 'throttle' || trigger === throttle || trigger?.name?.indexOf('throttle') === 0) {
-      yield throttle(ms, action, saga)
+      yield (trigger === 'throttle' ? throttle : trigger)(ms, action, saga)
     } else {
       yield trigger(action, saga)
     }
