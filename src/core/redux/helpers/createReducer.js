@@ -7,6 +7,7 @@
 export const defaultActionHndler = (state, { payload }) => payload
 
 export const createReducer = (actionHandlers, initialState = {}) => (
+  // eslint-disable-next-line default-param-last
   state = initialState, action, appState = state,
 ) => {
   const handler = actionHandlers[action.type]

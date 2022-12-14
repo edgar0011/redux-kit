@@ -137,6 +137,7 @@ export default function combineReducers (reducers) {
     sanityError = e
   }
 
+  // eslint-disable-next-line default-param-last
   return function combination (state = {}, action, appState = state) {
     if (sanityError) {
       throw sanityError

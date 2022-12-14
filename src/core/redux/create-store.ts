@@ -56,6 +56,7 @@ export const createStore = (
   store.sagaTasks = {}
   store.asyncReducers = {} as Reducer<any, AnyAction>
 
+  // eslint-disable-next-line default-param-last
   const runSaga = (saga: Saga, name: null | string = null, params?: Params | null) => {
     const derivedName = name || saga.name
 

@@ -1,5 +1,6 @@
 import { all, takeLatest, call, getContext } from 'redux-saga/effects'
 
+// eslint-disable-next-line default-param-last
 export const createSaga = (action, trigger = takeLatest, sagaFn, contextKeys, ms) => {
   const nameWatcher = `${action}SagaWatcher`
   const name = `${action}Saga`
